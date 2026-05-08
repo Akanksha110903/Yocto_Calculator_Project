@@ -17,7 +17,7 @@ downloads/
 .vscode/
 
 # Generated binaries
-calculator
+calculator.bin
 
 # Python cache
 __pycache__/
