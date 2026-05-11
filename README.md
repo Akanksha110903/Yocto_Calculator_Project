@@ -1,17 +1,22 @@
 # Yocto Calculator Application
 
-A custom Yocto layer containing a simple C++ calculator application integrated into a Yocto Linux image.
+A custom Yocto layer containing calculator applications integrated into a Yocto Linux image.
 
-## Project Overview
+This project demonstrates how to create and integrate custom applications into Yocto using BitBake recipes and Makefile-based builds.
+
+---
+
+# Project Overview
 
 This project demonstrates:
 
-- Creating a custom Yocto layer
-- Writing a BitBake recipe
-- Building a C++ application in Yocto
-- Installing binaries into the target root filesystem
-- Running the application inside QEMU
-- Integrating the package into `core-image-sato`
+* Creating a custom Yocto layer
+* Writing BitBake recipes
+* Building C++ applications in Yocto
+* Using both direct compilation and Makefile-based builds
+* Installing binaries into the target root filesystem
+* Integrating packages into `core-image-sato`
+* Running applications inside QEMU
 
 ---
 
@@ -22,11 +27,35 @@ meta-akanksha/
 ├── conf/
 │   └── layer.conf
 └── recipes-calculator/
-    └── calculator/
-        ├── calculator_1.0.bb
-        └── files/
-            └── calculator.cpp
+    ├── calculator/
+    │   ├── calculator_1.0.bb
+    │   └── files/
+    │       └── calculator.cpp
+    │
+└─ recipes-calculator-mkfile/
+    ├── calculator/
+    │   ├── mycal_1.0.bb
+    │   └── files/
+    │       └── calculator.cpp
+            └── Makefile
 ```
+
+---
+
+# Recipes
+
+## calculator
+
+Basic BitBake recipe that directly compiles the calculator source using Yocto build tasks.
+
+## mycal
+
+Makefile-based BitBake recipe demonstrating:
+
+* Custom Makefile integration
+* `oe_runmake`
+* Manual install steps
+* External build system usage inside Yocto
 
 ---
 
@@ -34,11 +63,12 @@ meta-akanksha/
 
 The calculator supports:
 
-- Addition
-- Subtraction
-- Multiplication
-- Division
-- Integer and floating-point operations
+* Addition
+* Subtraction
+* Multiplication
+* Division
+* Integer operations
+* Floating-point operations
 
 Example:
 
@@ -61,11 +91,19 @@ bitbake-layers add-layer ../layers/meta-akanksha
 
 ## 2. Add Package to Image
 
-Add to `conf/local.conf`:
+Add the package to `conf/local.conf`:
 
-```bash
+```conf
+IMAGE_INSTALL:append = " mycal"
+```
+
+You can also use:
+
+```conf
 IMAGE_INSTALL:append = " calculator"
 ```
+
+depending on which recipe you want to include.
 
 ---
 
@@ -90,6 +128,12 @@ runqemu qemux86-64
 Inside QEMU:
 
 ```bash
+calculator
+```
+
+or
+
+```bash
 /usr/bin/calculator
 ```
 
@@ -97,11 +141,12 @@ Inside QEMU:
 
 # Technologies Used
 
-- Yocto Project
-- BitBake
-- Embedded Linux
-- C++
-- QEMU
+* Yocto Project
+* BitBake
+* Embedded Linux
+* C++
+* GNU Make
+* QEMU
 
 ---
 
@@ -109,9 +154,22 @@ Inside QEMU:
 
 This project helped in understanding:
 
-- Yocto layer structure
-- BitBake recipes
-- Cross-compilation
-- Root filesystem generation
-- Package installation
-- QEMU testing
+* Yocto layer structure
+* BitBake recipes
+* Makefile integration in Yocto
+* Cross-compilation
+* Root filesystem generation
+* Package installation
+* QEMU testing
+* Embedded Linux development workflow
+
+---
+
+# Version History
+
+| Version | Description                         |
+| ------- | ----------------------------------- |
+| v1.0    | Initial calculator BitBake recipe   |
+| v1.1    | Added Makefile-based `mycal` recipe |
+
+---
