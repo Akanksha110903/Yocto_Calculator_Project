@@ -38,6 +38,13 @@ meta-akanksha/
     │   └── files/
     │       └── calculator.cpp
             └── Makefile
+└─ recipes-calculator-app
+    ├── calculator/
+    │   ├── app_1.0.bb
+    │   └── files/
+    │       └── calculator.cpp
+            └── Makefile
+            └── calculator.service
 ```
 
 ---
@@ -57,6 +64,8 @@ Makefile-based BitBake recipe demonstrating:
 * Manual install steps
 * External build system usage inside Yocto
 
+## app
+Makefile-based Bitbake recipe plus added recipe for systemd to autostart the calculator app 
 ---
 
 # Features
@@ -102,6 +111,15 @@ You can also use:
 ```conf
 IMAGE_INSTALL:append = " calculator"
 ```
+For app recipe add
+```conf
+IMAGE_INSTALL:append = " app"
+DISTRO_FEATURES:remove = " sysvinit"
+
+DISTRO_FEATURES:append = " usrmerge systemd"
+
+VIRTUAL-RUNTIME_init_manager = "systemd"
+```
 
 depending on which recipe you want to include.
 
@@ -135,6 +153,11 @@ or
 
 ```bash
 /usr/bin/calculator
+```
+
+You can check if the calculator service is running or not using
+```bash
+systemctl status calculator.service
 ```
 
 ---
