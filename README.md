@@ -195,5 +195,6 @@ This project helped in understanding:
 | ------- | ----------------------------------- |
 | v1.0    | Initial calculator BitBake recipe   |
 | v1.1    | Added Makefile-based `mycal` recipe |
+| v1.2    | Added systemd recipe for calculator app |
 
 ---
