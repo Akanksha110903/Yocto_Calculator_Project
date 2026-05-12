@@ -65,6 +65,7 @@ Makefile-based BitBake recipe demonstrating:
 * External build system usage inside Yocto
 
 ## app
+
 Makefile-based Bitbake recipe plus added recipe for systemd to autostart the calculator app 
 ---
 
