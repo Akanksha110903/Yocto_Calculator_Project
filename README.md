@@ -45,6 +45,12 @@ meta-akanksha/
     │       └── calculator.cpp
             └── Makefile
             └── calculator.service
+recipes-core
+    ├── psplash/
+    │   ├──psplash_%.bbappend
+    │   └── files/
+    │       └── psplash-poky-img.png
+           
 ```
 
 ---
@@ -68,6 +74,9 @@ Makefile-based BitBake recipe demonstrating:
 
 Makefile-based Bitbake recipe plus added recipe for systemd to autostart the calculator app 
 ---
+
+## psplash
+Added the splash  image , so during boot it will show my image logo 
 
 # Features
 
@@ -123,6 +132,11 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 ```
 
 depending on which recipe you want to include.
+
+can add following in local.conf file to see the splash image logo 
+```conf
+IMAGE_FEATURES += "splash"
+```
 
 ---
 
@@ -196,5 +210,6 @@ This project helped in understanding:
 | v1.0    | Initial calculator BitBake recipe   |
 | v1.1    | Added Makefile-based `mycal` recipe |
 | v1.2    | Added systemd recipe for calculator app |
+| v1.3    | Added costom splash image logo |
 
 ---
